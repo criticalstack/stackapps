@@ -24,6 +24,7 @@ jobs:
     - name: Generate chart
       run: |
           mkdir -p dist
+          helm dependency update
           helm package --version ${{ steps.prep.outputs.version }} --app-version ${{ steps.prep.outputs.app }} --destination ./dist ./chart
     - uses: criticalstack/upsert-release-assets@v1
       env:
