@@ -6,6 +6,8 @@ The premier, officially supported mechanism for deploying a kubernetes applicati
 
 This repo is the home of `StackApps` (and `StackValues`, `StackReleases`, ...) CRDs, controllers, and webhooks.
 
+Check out [the docs](https://criticalstack.github.io/stackapps/).
+
 Uses [kubebuilder](https://github.com/kubernetes-sigs/kubebuilder).
 
 ## Install
