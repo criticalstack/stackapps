@@ -42,4 +42,3 @@ referenced by a `StackApp` are immutable.
 
 
 ![Overview diagram](./stackapps-overview.png)
-
