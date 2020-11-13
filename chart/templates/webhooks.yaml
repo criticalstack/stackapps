@@ -1,0 +1,116 @@
+{{- if .Values.webhooks.enabled }}
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: stackapps-mutating-webhook-configuration
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/stackapps-webhook-cert
+webhooks:
+- clientConfig:
+    caBundle: Cg==
+    service:
+      name: stackapps-webhook
+      namespace: {{ .Release.Namespace }}
+      path: /mutate-features-criticalstack-com-v1alpha1-apprevision
+  failurePolicy: Fail
+  name: stackapps-mutation.criticalstack.com
+  rules:
+  - apiGroups:
+    - features.criticalstack.com
+    apiVersions:
+    - '*'
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - apprevisions
+    - apprevisions/status
+    scope: "Namespaced"
+- clientConfig:
+    caBundle: Cg==
+    service:
+      name: stackapps-webhook
+      namespace: {{ .Release.Namespace }}
+      path: /mutate-features-criticalstack-com-v1alpha1-stackapp
+  failurePolicy: Fail
+  name: stackapps-validation.criticalstack.com
+  rules:
+  - apiGroups:
+    - features.criticalstack.com
+    apiVersions:
+    - '*'
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - stackapps
+    scope: "Cluster"
+---
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: stackapps-validating-webhook-configuration
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/stackapps-webhook-cert
+webhooks:
+- clientConfig:
+    caBundle: Cg==
+    service:
+      name: stackapps-webhook
+      namespace: {{ .Release.Namespace }}
+      path: /validate-features-criticalstack-com-v1alpha1-apprevision
+  failurePolicy: Fail
+  name: stackapps-validation.criticalstack.com
+  rules:
+  - apiGroups:
+    - features.criticalstack.com
+    apiVersions:
+    - '*'
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - apprevisions
+    - apprevisions/status
+    scope: "Namespaced"
+- clientConfig:
+    caBundle: Cg==
+    service:
+      name: stackapps-webhook
+      namespace: {{ .Release.Namespace }}
+      path: /validate-features-criticalstack-com-v1alpha1-verificationkey
+  failurePolicy: Fail
+  name: stackapps-validation.criticalstack.com
+  rules:
+  - apiGroups:
+    - features.criticalstack.com
+    apiVersions:
+    - '*'
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - verificationkeys
+    scope: "Cluster"
+- clientConfig:
+    caBundle: Cg==
+    service:
+      name: stackapps-webhook
+      namespace: {{ .Release.Namespace }}
+      path: /validate-features-criticalstack-com-v1alpha1-stackapp
+  failurePolicy: Fail
+  name: stackapps-validation.criticalstack.com
+  rules:
+  - apiGroups:
+    - features.criticalstack.com
+    apiVersions:
+    - '*'
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - stackapps
+    - stackapps/status
+    scope: "Cluster"
+---
+{{- end }}

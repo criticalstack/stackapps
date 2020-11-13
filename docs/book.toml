@@ -1,0 +1,10 @@
+[book]
+authors = ["brandonastell"]
+language = "en"
+multilingual = false
+src = "src"
+title = "the Critical Stack StackApps Book"
+
+
+[output.html]
+default-theme = "ayu"

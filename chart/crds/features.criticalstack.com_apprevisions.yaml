@@ -1,0 +1,212 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.3.0
+  creationTimestamp: null
+  name: apprevisions.features.criticalstack.com
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .spec.revision
+    description: Revision
+    name: Revision
+    type: integer
+  - JSONPath: .spec.manifests
+    description: Current Manifest ConfigMap
+    name: Manifests
+    type: string
+  - JSONPath: .status.conditions[?(@.type == 'Ready')].status
+    description: AppRevision is ready
+    name: Ready
+    type: string
+  - JSONPath: .status.conditions[?(@.type == 'Healthy')].status
+    description: AppRevision is ready
+    name: Healthy
+    type: string
+  - JSONPath: .metadata.creationTimestamp
+    name: Age
+    type: date
+  group: features.criticalstack.com
+  names:
+    kind: AppRevision
+    listKind: AppRevisionList
+    plural: apprevisions
+    singular: apprevision
+  scope: Namespaced
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      description: AppRevision is the Schema for the stackapps API
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: AppRevisionSpec defines the desired state of AppRevision
+          properties:
+            appRevisionConfig:
+              properties:
+                appNamespace:
+                  type: string
+                devMode:
+                  type: boolean
+                signing:
+                  properties:
+                    insecureSkipVerification:
+                      type: boolean
+                    optional:
+                      type: boolean
+                  type: object
+              required:
+              - appNamespace
+              type: object
+            healthChecks:
+              items:
+                properties:
+                  name:
+                    type: string
+                  type:
+                    enum:
+                    - jsonpath
+                    - go-template
+                    type: string
+                  value:
+                    type: string
+                required:
+                - type
+                - value
+                type: object
+              type: array
+            manifests:
+              description: Manifests represents the name of a ConfigMap in the app
+                namespace containing manifests to be deployed
+              type: string
+            revision:
+              description: Revision number of this version of the application
+              format: int64
+              type: integer
+            signatures:
+              additionalProperties:
+                format: byte
+                type: string
+              description: Signatures is an optional map of VerificationKey names
+                to signatures of the manifest data
+              type: object
+          required:
+          - manifests
+          type: object
+        status:
+          description: AppRevisionStatus defines the observed state of AppRevision
+          properties:
+            conditions:
+              items:
+                description: AppRevisionCondition describes the state of an apprevision
+                  at a certain point.
+                properties:
+                  lastTransitionTime:
+                    description: Last time the condition transitioned from one status
+                      to another.
+                    format: date-time
+                    type: string
+                  message:
+                    description: A human readable message indicating details about
+                      the transition.
+                    type: string
+                  reason:
+                    description: The reason for the condition's last transition.
+                    type: string
+                  status:
+                    description: Status of the condition, one of True, False, Unknown.
+                    type: string
+                  type:
+                    description: Type of apprevision condition.
+                    type: string
+                required:
+                - status
+                - type
+                type: object
+              type: array
+            originalResources:
+              items:
+                type: object
+              type: array
+            resourceConditions:
+              items:
+                properties:
+                  instances:
+                    items:
+                      properties:
+                        reason:
+                          type: string
+                        resource:
+                          description: TypedLocalObjectReference contains enough information
+                            to let you locate the typed referenced object inside the
+                            same namespace.
+                          properties:
+                            apiGroup:
+                              description: APIGroup is the group for the resource
+                                being referenced. If APIGroup is not specified, the
+                                specified Kind must be in the core API group. For
+                                any other third-party types, APIGroup is required.
+                              type: string
+                            kind:
+                              description: Kind is the type of resource being referenced
+                              type: string
+                            name:
+                              description: Name is the name of resource being referenced
+                              type: string
+                          required:
+                          - kind
+                          - name
+                          type: object
+                        status:
+                          type: string
+                      required:
+                      - resource
+                      - status
+                      type: object
+                    type: array
+                  status:
+                    type: string
+                  type:
+                    type: string
+                required:
+                - instances
+                - status
+                - type
+                type: object
+              type: array
+            resources:
+              items:
+                type: object
+              type: array
+          required:
+          - conditions
+          - originalResources
+          - resourceConditions
+          - resources
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

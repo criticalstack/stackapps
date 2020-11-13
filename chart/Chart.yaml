@@ -1,0 +1,10 @@
+apiVersion: v2
+name: stackapps
+description: StackApps ecosystem CRDs and controllers
+type: application
+version: 0.2.0
+appVersion: 0.2.0-alpha.4
+dependencies:
+  - name: traefik
+    version: 9.8.2
+    repository: https://helm.traefik.io/traefik

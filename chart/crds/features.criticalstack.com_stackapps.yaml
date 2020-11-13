@@ -1,0 +1,237 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.3.0
+  creationTimestamp: null
+  name: stackapps.features.criticalstack.com
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .status.currentRelease.status.currentRevision.namespace
+    description: App Namespace
+    name: App Namespace
+    type: string
+  - JSONPath: .status.currentRelease.status.currentRevision.revision
+    description: Revision
+    name: Revision
+    type: integer
+  - JSONPath: .spec.appRevision.manifests
+    description: Current Manifest ConfigMap
+    name: Manifests
+    type: string
+  - JSONPath: .status.currentRelease.status.state
+    description: Deployment Status
+    name: State
+    type: string
+  - JSONPath: .metadata.creationTimestamp
+    name: Age
+    type: date
+  group: features.criticalstack.com
+  names:
+    kind: StackApp
+    listKind: StackAppList
+    plural: stackapps
+    singular: stackapp
+  scope: Cluster
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      description: StackApp is the Schema for the stackapps API
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: StackAppSpec defines the desired state of StackApp
+          properties:
+            appRevision:
+              description: AppRevisionSpec defines the desired state of AppRevision
+              properties:
+                appRevisionConfig:
+                  properties:
+                    appNamespace:
+                      type: string
+                    devMode:
+                      type: boolean
+                    signing:
+                      properties:
+                        insecureSkipVerification:
+                          type: boolean
+                        optional:
+                          type: boolean
+                      type: object
+                  required:
+                  - appNamespace
+                  type: object
+                healthChecks:
+                  items:
+                    properties:
+                      name:
+                        type: string
+                      type:
+                        enum:
+                        - jsonpath
+                        - go-template
+                        type: string
+                      value:
+                        type: string
+                    required:
+                    - type
+                    - value
+                    type: object
+                  type: array
+                manifests:
+                  description: Manifests represents the name of a ConfigMap in the
+                    app namespace containing manifests to be deployed
+                  type: string
+                revision:
+                  description: Revision number of this version of the application
+                  format: int64
+                  type: integer
+                signatures:
+                  additionalProperties:
+                    format: byte
+                    type: string
+                  description: Signatures is an optional map of VerificationKey names
+                    to signatures of the manifest data
+                  type: object
+              required:
+              - manifests
+              type: object
+            majorVersion:
+              format: int64
+              type: integer
+          required:
+          - appRevision
+          - majorVersion
+          type: object
+        status:
+          properties:
+            currentRelease:
+              properties:
+                name:
+                  type: string
+                namespace:
+                  type: string
+                status:
+                  description: StackReleaseStatus defines the observed state of StackRelease
+                  properties:
+                    conditions:
+                      items:
+                        properties:
+                          canaryweight:
+                            properties:
+                              canaryWeight:
+                                type: integer
+                              nextStep:
+                                format: date-time
+                                type: string
+                              stepDuration:
+                                type: string
+                            required:
+                            - canaryWeight
+                            - stepDuration
+                            type: object
+                          lastTransitionTime:
+                            description: Last time the condition transitioned from
+                              one status to another.
+                            format: date-time
+                            type: string
+                          message:
+                            description: A human readable message indicating details
+                              about the transition.
+                            type: string
+                          reason:
+                            description: The reason for the condition's last transition.
+                            type: string
+                          status:
+                            description: Status of the condition, one of True, False,
+                              Unknown.
+                            type: string
+                          type:
+                            description: Type of statefulset condition.
+                            type: string
+                        required:
+                        - canaryweight
+                        - status
+                        - type
+                        type: object
+                      type: array
+                    currentCanaryWeight:
+                      properties:
+                        canaryWeight:
+                          type: integer
+                        nextStep:
+                          format: date-time
+                          type: string
+                        stepDuration:
+                          type: string
+                      required:
+                      - canaryWeight
+                      - stepDuration
+                      type: object
+                    currentRevision:
+                      properties:
+                        healthy:
+                          type: string
+                        name:
+                          type: string
+                        namespace:
+                          type: string
+                        revision:
+                          format: int64
+                          type: integer
+                      required:
+                      - healthy
+                      - name
+                      - namespace
+                      - revision
+                      type: object
+                    reason:
+                      type: string
+                    state:
+                      type: string
+                  required:
+                  - currentRevision
+                  - reason
+                  - state
+                  type: object
+              required:
+              - name
+              - namespace
+              type: object
+            message:
+              type: string
+            reason:
+              type: string
+            state:
+              type: string
+          required:
+          - message
+          - reason
+          - state
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

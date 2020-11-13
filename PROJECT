@@ -1,0 +1,22 @@
+domain: criticalstack.com
+repo: github.com/criticalstack/stackapps
+resources:
+- group: features
+  kind: AppRevision
+  version: v1alpha1
+- group: features
+  kind: StackValue
+  version: v1alpha1
+- group: features
+  kind: VerificationKey
+  version: v1alpha1
+- group: features
+  kind: StackRelease
+  version: v1alpha1
+- group: features
+  kind: StackAppConfig
+  version: v1alpha1
+- group: features
+  kind: StackApp
+  version: v1alpha1
+version: "2"

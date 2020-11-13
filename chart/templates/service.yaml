@@ -1,0 +1,12 @@
+{{- if .Values.webhooks.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: stackapps-webhook
+spec:
+  ports:
+    - port: 443
+      targetPort: webhook-server
+  selector:
+    {{- include "stackapps.selectorLabels" . | nindent 6 }}
+{{- end }}
