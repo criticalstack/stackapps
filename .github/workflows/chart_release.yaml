@@ -17,7 +17,7 @@ jobs:
     - name: Prepare
       id: prep
       run: |
-        echo ::set-output name=version::${GITHUB_REF#refs/tags/}
+        echo ::set-output name=version::${GITHUB_REF#refs/tags/chart/}
         echo ::set-output name=app::$(git describe --match "v*" --abbrev=0 --tags $(git rev-list --tags --max-count=1)) 
     - name: Install helm
       run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
