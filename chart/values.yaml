@@ -6,8 +6,8 @@ enableLeaderElection: true
 replicaCount: 1
 
 image:
-  repository: cscr.io/criticalstack/stackapps
-  tag: 0.2.0-alpha.4
+  repository: criticalstack/stackapps
+  tag: v0.1.0
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
