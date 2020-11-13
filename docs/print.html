@@ -1,0 +1,607 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>the Critical Stack StackApps Book</title>
+        
+        <meta name="robots" content="noindex" />
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="stackapps-guide/overview.html"><strong aria-hidden="true">1.</strong> Stackapps Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="stackapps-guide/quickstart.html"><strong aria-hidden="true">1.1.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="stackapps-guide/technicaloverview.html"><strong aria-hidden="true">1.2.</strong> Technical Overview and Glossery of Terms</a></li><li class="chapter-item expanded "><a href="stackapps-guide/cluster-requirements.html"><strong aria-hidden="true">1.3.</strong> Cluster Requirements</a></li><li class="chapter-item expanded "><a href="stackapps-guide/installation.html"><strong aria-hidden="true">1.4.</strong> Installation</a></li><li class="chapter-item expanded "><a href="stackapps-guide/configuration.html"><strong aria-hidden="true">1.5.</strong> Configuration</a></li><li class="chapter-item expanded "><a href="stackapps-guide/stackapps.html"><strong aria-hidden="true">1.6.</strong> StackApp</a></li><li class="chapter-item expanded "><a href="stackapps-guide/stackvalues.html"><strong aria-hidden="true">1.7.</strong> StackValues</a></li><li class="chapter-item expanded "><a href="stackapps-guide/stackrelease.html"><strong aria-hidden="true">1.8.</strong> StackRelease</a></li><li class="chapter-item expanded "><a href="stackapps-guide/apprevision.html"><strong aria-hidden="true">1.9.</strong> AppRevision</a></li></ol></li><li class="chapter-item expanded "><a href="resources/resources.html"><strong aria-hidden="true">2.</strong> Custom Resources</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="resources/stackappsresource.html"><strong aria-hidden="true">2.1.</strong> StackApp</a></li><li class="chapter-item expanded "><a href="resources/stackreleaseresource.html"><strong aria-hidden="true">2.2.</strong> StackRelease</a></li><li class="chapter-item expanded "><a href="resources/stackvaluesecret.html"><strong aria-hidden="true">2.3.</strong> StackValue</a></li><li class="chapter-item expanded "><a href="resources/apprevisionresource.html"><strong aria-hidden="true">2.4.</strong> AppRevision</a></li></ol></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">4.</strong> FAQ</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu (default)</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">the Critical Stack StackApps Book</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#stackapps-guide" id="stackapps-guide">Stackapps Guide</a></h1>
+<h3><a class="header" href="#stackapps" id="stackapps">StackApps</a></h3>
+<p>Critical Stack Applications- <code>StackApps</code> represent the premier, officially
+supported mechanism for deploying a Kubernetes application into a Critical Stack
+cluster. The <code>StackApp</code> is intended to be the main representation of
+a deployment/release of an application, at a particular version, running in the
+cluster. StackApps are built of kubernetes native resources and kubernetes
+custom defined resources. They can be interacted with via the Critical Stack UI
+or the Kubectl command line tool.</p>
+<p><code>StackApps</code> provide the user with a means of representing an entire running 
+application with a single cryptographically signed artifact. This provides a
+developer friendly means for an application to be moved between environments 
+in a repeatable, verifiable, and auditable fashion.</p>
+<p>Once the StackApp has been deployed all interaction with the application is 
+handled via the StackApp, resource ownership insures the state of the 
+application matches the state defined in the StackApp at all times. Any change
+to the application is achieved by building and modifying the application in a
+development environment and packaging a new revision. When this new revision 
+is deployed in a QA or Production environment the underlying application is 
+updated to match the state defined in the new revision. This can be accomplished
+via standard Kubernetes rolling update or our stand alone Canary deployment 
+<code>StackRelease</code>.</p>
+<h4><a class="header" href="#packaging" id="packaging">Packaging</a></h4>
+<p><code>StackApps</code> are build from applications running inside a cluster. Currently the 
+premier packaging mechanism is built into the Critical Stack UI; however there
+is a cli on the roadmap and a StackApp can be built and signed manually
+via yaml StackApp manifest and the exporting of included resource manifests
+with kubectl.</p>
+<h1><a class="header" href="#quick-start" id="quick-start">Quick Start</a></h1>
+<h3><a class="header" href="#getting-it-running" id="getting-it-running">Getting it running.</a></h3>
+<p>While the StackApps controllers can be run on their own, the Critical Stack UI
+has been designed with them in mind. In addition the Critical Stack UI is
+currently the primary way to package a running application into a <code>StackApp</code>. </p>
+<p>If you would like to add the UI to your cluster please follow the steps in the UI repository
+<a href="https://github.com/criticalstack/ui">here</a>.</p>
+<p>In the case of a local cluster or remote development cluster, the Critical
+Stack UI and <code>StackApps</code> controllers can be used together. For a production
+cluster in which applications will be deployed via <code>StackApps</code> the Critical
+Stack UI is not necessary.</p>
+<p>To Install the <code>StackApps</code> Controller please follow the
+<a href="stackapps-guide/./installation.html">Installation</a> page.</p>
+<p>For information on creating, packaging, and signing a <code>StackApp</code> from a running
+application see the docs <a href="https://github.com/criticalstack/ui">here</a> </p>
+<h3><a class="header" href="#deploying-an-application-to-a-new-cluster-with-stackapps" id="deploying-an-application-to-a-new-cluster-with-stackapps">Deploying an application to a new cluster with StackApps.</a></h3>
+<p>Once you have a packaged and exported <code>StackApp</code> you'll need to set up a few things as an
+administrator in the cluster in which you wish to deploy the <code>StackApp</code>. </p>
+<ol>
+<li>Ensure the <code>StackApps</code> controllers and resource definitions are on the target
+cluster. The Controllers should be running in the <code>critical-stack</code>
+namespace.</li>
+<li>Apply your <code>StackAppsConfig</code> for the application. Details can be found
+<a href="stackapps-guide/./configuration.html">here</a>.</li>
+<li>Export the <code>VerificationKey</code> from the key pair that was used to sign the
+<code>StackApp</code> from the cluster in which it was created. Apply it to the target
+cluster in the namespace specified in the <code>StackAppsConfig</code> as
+<code>appnamespace</code>.</li>
+<li>Apply the <code>StackApp</code>. The <code>StackApp</code> is a cluster scoped resource, you will not
+need to specify a namespace. Once the <code>StackApp</code> has been applied allow time
+for all of the resources to become healthy and check out your application
+running in its new home!</li>
+</ol>
+<h1><a class="header" href="#stackapps-guide-1" id="stackapps-guide-1">StackApps Guide</a></h1>
+<p>A <code>StackApp</code> is a resource in the Critical Stack cluster which repesents
+a kubernetes <em>application</em> at a particular version.</p>
+<p>The <code>StackApp</code> contains:</p>
+<ul>
+<li>Metadata about the <em>application</em></li>
+<li>A reference to the <em>manifests</em> used to deploy all associated resources</li>
+<li>Signature details for the <em>manifests</em></li>
+</ul>
+<p>The Critical Stack cluster contains infrastructure that is aware of <code>StackApps</code>.
+When the <code>StackApp</code> resource is created or modified, the underlying
+<em>application</em> resources are updated accordingly (assuming that the cluster's
+configured deployment guarantees are met which may include signing,
+compatibility checks, etc).</p>
+<p>A <code>StackApp</code> may be created from raw kubernetes <em>manifests</em> that already exist
+(or that are generated from existing source material), or it may be created by
+encoding selected objects running within a kubernetes cluster namespace (see
+<a href="stackapps-guide/./tech-details.html#packaging">packaging</a>). The former method (existing
+<em>manifests</em>) is intended to serve as a bridge for developers with existing
+kubernetes <em>applications</em>, or those who would like to create their applications
+using third-party tools. The latter (running resources) is tailored toward
+developers creating their <em>applications</em> within the Critical Stack &quot;ecosystem&quot;
+to begin with - e.g. with the aid of CS UI and accompanying tools. The
+Critical Stack API and UI would provide functionality for selecting running resources
+for packaging and export into a <code>StackApp</code>.</p>
+<p>Once a <code>StackApp</code> has been deployed (or created from components running in the
+cluster), the CS UI can provide aggregated status information (health checks,
+metrics data, etc) for <code>StackApps</code> in each namespace. Because this system is
+fully integrated with the kubernetes API, this information is easily available
+to other tools such as <code>kubectl</code> without the need for the CS UI to act as an
+intermediary.</p>
+<p>Resources that belong to a <code>StackApp</code> are protected (using kubernetes RBAC
+permissions) by default. Similarly, all <em>manifests</em> currently or previously
+referenced by a <code>StackApp</code> are immutable.</p>
+<p><img src="stackapps-guide/../img/stackapps-overview.png" alt="Overview diagram" /></p>
+<h2><a class="header" href="#glossary" id="glossary">Glossary</a></h2>
+<p>See below for brief descriptions of key terms. Definitions are further expanded
+by the behavior outlined <a href="stackapps-guide/technicaloverview.html#overview">below</a>.</p>
+<ul>
+<li><strong>Application</strong>: for the purposes of this design, an <em>application</em> refers to
+a &quot;business application&quot;, i.e. the primary workload of a Critical Stack
+cluster. It may or may not be completely self-contained, and it is likely 
+comprised of several logical components.</li>
+<li><strong>StackApp</strong>: a &quot;Critical Stack Application&quot; (<em>StackApp</em>) encapsulates an
+<em>application</em> logically. It is responsible for grouping together kubernetes
+resources and managing their lifecycle - creation, upgrade, rollback,
+deletion.</li>
+<li><strong>StackValue</strong>: the representation of a secret or an environment specific
+configuration item within the <em>StackApp</em></li>
+<li><strong>Manifests</strong>: actual kubernetes-native encoding of application resources. In
+most cases the <em>manifests</em> would be generated from running resources in
+a cluster environment, though the initial <em>manifests</em> may come from an existing
+build artifact.</li>
+<li><strong>Signer</strong>: a <em>signer</em> is an identity that attests to the validity of
+<em>manifests</em>. The core purpose of signing is to designate readiness for
+deployment, though a developer or cluster administrator may wish to further
+differentiate intents; <em>manifests</em> may be signed multiple times and each may
+indicate something different (i.e. signatures by a developer, a QA tester,
+a security review, and so on).</li>
+</ul>
+<h2><a class="header" href="#stackapps-custom-resources" id="stackapps-custom-resources">StackApps Custom Resources</a></h2>
+<p>Resources in the StackApps family are built into the API Group 
+features.criticalstack.com. </p>
+<ul>
+<li><strong>StackAppsConfig</strong> <em>Cluster Scoped</em>: The StackAppsConfig should be accessible only by a 
+cluster administrator to maintain separation of dutes and ensure the basic
+configuration goes through an additional verification layer. The StackAppsConfig containts information
+used buy all of the controllers in the StackApps family.</li>
+<li><strong>StackApp</strong> <em>Cluster Scoped</em>: The stackApp is the owner of all things StackApps related. It
+contains information necessary build the application as well as related metadata
+necessary for verification before installation. Any interaction
+with an application with the exception of administrator configuration should 
+happen at this level</li>
+<li><strong>StackRelease</strong> <em>Namespaced</em>: The StackRelease contains information pertaining to the 
+current state of the application deployment, changes here precipitate any routing change 
+or change to an underlying application. Only the StackApp controller should 
+be allowed to create or modify a StackRelease; however StackReleases contain
+valuable status and troubleshooting information and should be use accordingly.</li>
+<li><strong>AppRevision</strong> <em>Namespaced</em>: The AppRevision contains the base information needed to 
+install and manage the application. Much like the StackRelease it should only
+be created or updated but one of the StackApps controllers, Although it does 
+contain valuable status information that should be used for monitoring and 
+troubleshooting. </li>
+<li><strong>VerificationKey</strong> <em>Cluster Scoped?</em>: The  VerificationKey is simply a crd designed to allow 
+Rbac management of the public side of the RSA signing key</li>
+</ul>
+<h1><a class="header" href="#cluster-requirements" id="cluster-requirements">Cluster Requirements</a></h1>
+<h1><a class="header" href="#installation" id="installation">Installation</a></h1>
+<h3><a class="header" href="#clone-the-repository-and-build-the-dependencies" id="clone-the-repository-and-build-the-dependencies">Clone the repository and build the dependencies</a></h3>
+<pre><code class="language-shell">git clone https://github.com/criticalstack/stackapps.git
+cd stackapps
+
+helm dependency update ./chart
+</code></pre>
+<h4><a class="header" href="#leverage-the-included-helm-chart-for-installation" id="leverage-the-included-helm-chart-for-installation">Leverage the included helm chart for installation</a></h4>
+<pre><code class="language-shell">helm install stackapps ./chart
+</code></pre>
+<h4><a class="header" href="#developers-can-utilize-tilt-ensure-you-have-tilt-and-go-installed-on-your-system" id="developers-can-utilize-tilt-ensure-you-have-tilt-and-go-installed-on-your-system">Developers can utilize tilt (ensure you have tilt and go installed on your system)</a></h4>
+<pre><code class="language-shell">tilt up
+</code></pre>
+<h1><a class="header" href="#configuration" id="configuration">Configuration</a></h1>
+<p>Configuration of StackApps is handled through a cluster scoped custom resource of <em>KIND</em> <code>StackAppConfig</code> in the <em>API-GROUP</em> <code>features.criticalstack.com</code> and is application specific.</p>
+<p>the Spec of the <code>StackAppConfig</code> contains basic configuration for the application and more specific configuration for each StackApps controller.</p>
+<pre><code class="language-yaml">apiVersion: features.criticalstack.com/v1alpha1
+kind: StackAppConfig
+metadata:
+  generation: 1
+  name: stackapp-config
+spec:
+  environmentname: dev
+  appnamespace: prod-app
+  stackapps: #StackApps specific configuration
+  stackvalues: #StackValues Specific Configuration
+  releases: #StackRelease Specific Configuration 
+</code></pre>
+<h3><a class="header" href="#stackapps-specific-configuration" id="stackapps-specific-configuration">StackApps Specific Configuration</a></h3>
+<pre><code class="language-yaml">  stackapps:
+    enabled: false
+</code></pre>
+<p>This is a switch to disable the StackApps Controllers and currently is not used</p>
+<h3><a class="header" href="#stackvalues-specific-configuration" id="stackvalues-specific-configuration">StackValues Specific Configuration</a></h3>
+<pre><code class="language-yaml">  stackvalues:
+    enabled: false
+    insecure: false
+    tokenName: vault-token
+    sources: #array of source configurations
+</code></pre>
+<p><code>enabled</code>: Currently not implemented.</p>
+<p><code>insecure</code>: uses the hardcoded values provided in annotation form to populate the k8s resources. This is only for testing with non-secure text in a development invironment.</p>
+<p><code>tokenName</code>: the name of the k8s secret that contains the tokens to authenticate to platforms in which secrets and configuration items will be stored.</p>
+<p><code>sources</code>: Array of source configurations. Currently supported source types include <code>artifactory</code>, <code>aws_s3</code>, and <code>vault</code>.</p>
+<h4><a class="header" href="#stackvalue-sources" id="stackvalue-sources">StackValue Sources</a></h4>
+<pre><code class="language-yaml">      vault:
+        name: myvault
+        region: west
+        type: vault
+        route: &quot;http://vault.external.svc:8200&quot;
+</code></pre>
+<p><code>name</code>: alais to be used for the source</p>
+<p>'region<code>: Aws hosting region, only used if source is equal to </code>aws_s3`</p>
+<p><code>type</code>: type of source </p>
+<p><code>route</code>: url in which source is hosted </p>
+<h3><a class="header" href="#stackrelease-configuration" id="stackrelease-configuration">StackRelease Configuration</a></h3>
+<pre><code class="language-yaml">    enabled: true
+    backendType: traefik
+    ingressPort: 30080
+    host: myapp.com
+    releaseStages:
+    - canaryWeight: 20
+      stepDuration: &quot;1m&quot;
+    - canaryWeight: 50
+      stepDuration: &quot;1m&quot;
+    - canaryWeight: 100 
+</code></pre>
+<p><code>enabled</code>: Currently not implemented.</p>
+<p><code>backendType</code>: Specifies infrastructrue to use for deployends. Currently <code>traefik</code> is the only supported value. if this field does not exist StackRelease will not be used.</p>
+<p><code>ingressPort</code>: Port in which the application will be exposed.</p>
+<p><code>host</code>: Hostname of the application.</p>
+<p><code>releaseStages</code>: Array of stages the canary controller will step though. <code>canaryWeight</code> is represented in percent and `stepDuration is represented as a time i.e. &quot;60s&quot; is equal to &quot;1m&quot;.</p>
+<p>this full example yaml file can be found this link that i might put here at some point </p>
+<h1><a class="header" href="#stackapps-1" id="stackapps-1">StackApps</a></h1>
+<p>The StackApp is the Highest order resource in the StackApps ecosystem, and the
+only resource a developer (or ci pipeline) needs to interact with. StackApps are
+immutable and changes should be represented in new revisions. </p>
+<p>When a StackApp is bundled it contains two major components. The meat 
+of the StackApp is in the nested AppRevision, the other main component that 
+is a configmap containing a grouping of all of the manifests that 
+make up the application in the form of a configmap. There are additional 
+elements that will be populated on deployment by the StackApps controller.</p>
+<p>The manifests are signed on StackApp creation and result is stored in the 
+AppRevision. StackApps are cluster scoped resources, for additional information 
+on AppRevisions see the AppRevision Documentation. </p>
+<p>See the details on the <code>StackApp</code> resource <a href="stackapps-guide/../resources/stackAppsResource.html">here</a></p>
+<h1><a class="header" href="#stackvalues" id="stackvalues">StackValues</a></h1>
+<p>StackValues are custom resources that replace sensitive data or information 
+that will be specific to an environment. This includes all Kubernetes Secrets
+and some ConfigMaps. When a <code>StackApp</code> is applied that contains one or more 
+<code>StackValue</code>, the StackValue controller uses the contained metadata as well
+as information from the <code>StackAppConfig</code> to fetch the value and build the 
+corresponding Kubernetes resource. Currently StackValues can retrieve data
+from  Artifactory, Hashicorp Vault, and Amazon S3. 
+If a <code>StackApp</code> is packaged using the Critical Stack UI Secrets will 
+automatically be replaced and ConfigMaps will be included or replaced 
+based on annotations. If these annotations do not exist the user will 
+be prompted to add them.  During the packaging of a StackApp all 
+necessary metadata is gathered from annotations on the resource 
+<a href="stackapps-guide/../resources/StackValueSecret.html">see annotations here</a>. 
+These annotations on Secrets and any Configmap that will 
+be replaced by a StackValue are necessary before any StackApp 
+can be packaged.</p>
+<p>See the details on the <code>StackValues</code> resource <a href="stackapps-guide/../resources/StackValueSecret.html">here</a></p>
+<h1><a class="header" href="#stackrelease" id="stackrelease">StackRelease</a></h1>
+<p>The StackRelease is a Namespace scoped custom resource that contains information about
+the deployment details for an application. If the StackRelease feature is not 
+used the StackRelease is largely a pass through step on and only serves to 
+deploy the AppRevision into its namespace. If the StackRelease feature is 
+toggled on the StackRelease controller will deploy the application into 
+a newly built namespace that is named with the revision and then build the 
+resources necessary to preform a canary deployment and slowly shift traffic
+into the new namespace from the stable version. The mechanism for this is 
+defined in the StackReleaseConfig( ### link doc), Currently Treafik is the 
+only supported mechanism however service mesh integration is on the roadmap.</p>
+<p>The StackRelease will be deployed and managed by the StackApp
+controller; however relevant diagnostic and monitoring information can
+be had with introspection. <code>kubectl describe stackRelease &lt;myStackRelease&gt;</code></p>
+<pre><code class="language-yaml">apiVersion: features.criticalstack.com/v1alpha1
+kind: StackRelease
+metadata:
+  name: demoapp-v1
+spec:
+  appname: demoapp-v1
+  apprevision: # nested AppRevision, see AppRevision docs.
+  releaseconfig: # nested config for StackRelease. See StackAppConfig docs.
+</code></pre>
+<p>see additional details about the <code>StackRelease</code> <a href="stackapps-guide/../resources/StackReleaseResource.html">here</a> </p>
+<h1><a class="header" href="#apprevision" id="apprevision">AppRevision</a></h1>
+<p>The AppRevision contains the base information needed to install and manage 
+the application. Much like the StackRelease it should only be created or
+updated but one of the StackApps controllers, Although it does contain valuable
+status information that should be used for monitoring and troubleshooting.</p>
+<p>see the details on the AppRevision resource <a href="stackapps-guide/../resources/AppRevisionResource.html">here</a></p>
+<h1><a class="header" href="#custom-resources" id="custom-resources">Custom Resources</a></h1>
+<h1><a class="header" href="#stackapp" id="stackapp">StackApp</a></h1>
+<pre><code class="language-yaml">apiVersion: features.criticalstack.com/v1alpha1
+kind: StackApp
+metadata:
+  generation: 1
+  name: demoapp-v1
+spec:
+  appRevision: # nested appRevision See appRevision docs.
+  majorVersion: 1
+</code></pre>
+<h4><a class="header" href="#stackapp-spec" id="stackapp-spec">StackApp Spec</a></h4>
+<p><code>appRevision</code>: contains details about the application being deployed, see 
+AppRevision Docs.</p>
+<p><code>majorVersion</code>: Major version of the application. This is Necessary because Major
+Version is using in naming to insure multiple major versions can be run 
+independently </p>
+<h4><a class="header" href="#stackapp-configmap" id="stackapp-configmap">StackApp ConfigMap</a></h4>
+<pre><code class="language-yaml">apiVersion: v1
+data:
+  manifests: | # note pipe to allow multiline string
+kind: ConfigMap
+metadata:
+  labels:
+    stackapps.criticalstack.com/export: ignore
+  name: demoapp-v1-r1
+</code></pre>
+<p><code>manifests</code>: list of yaml kubernetes resources separated by the standard <code>---</code>.</p>
+<h1><a class="header" href="#stackrelease-1" id="stackrelease-1">StackRelease</a></h1>
+<p>The <code>StackRelease</code> resource is built and managed by the StackApps controller.<br />
+It is namespaced and contains the <code>AppRevision</code> that its controller will 
+deploy and the relevant configuration taken from the <code>StackAppConfig</code>.</p>
+<pre><code class="language-yaml">apiVersion: features.criticalstack.com/v1alpha1
+kind: StackRelease
+metadata:
+  name: demoapp-v1
+spec:
+  appname: demoapp-v1
+  apprevision: # nested AppRevision, see AppRevision docs.
+  releaseconfig: # nested config for StackRelease. See StackAppConfig docs.
+</code></pre>
+<h1><a class="header" href="#stackvalue" id="stackvalue">StackValue</a></h1>
+<h3><a class="header" href="#stackvalue-annotations" id="stackvalue-annotations">StackValue Annotations</a></h3>
+<p><code>stackvalues.criticalstack.com/stackValue</code>: if true, build StackValue from
+ConfigMap and omit it from the stackapp.</p>
+<p><code>stackvalues.criticalstack.com/sourceType</code>: Type of source value will be retrieved 
+from. Should be one of the supported types (Artifactory, Vault, or AWS_S3).</p>
+<p><code>stackvalues.criticalstack.com/path</code>: Endpoint required to retrieve value. The 
+base URL is defined in the <code>StackAppsConfig</code>. </p>
+<p><code>stackvalues.criticalstack.com/insecureval</code>: non-Secure value to be used if the 
+StackApp is deployed to a development Cluster.</p>
+<h3><a class="header" href="#example-secret-prepared-for-stackvalues" id="example-secret-prepared-for-stackvalues">Example Secret prepared for StackValues</a></h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Secret
+metadata:
+  name: demoapp-db-credentials
+  annotations:
+    stackvalues.criticalstack.com/path: &quot;v1/secret/data/myapp/password&quot;
+    stackvalues.criticalstack.com/sourceType: &quot;vault&quot;
+    stackvalues.criticalstack.com/insecureval: &quot;password&quot;
+data:
+  value: MWYyZDFlMmU2N2Rm
+</code></pre>
+<h3><a class="header" href="#resulting-stackvalue-that-will-be-included-in-the-stackapp" id="resulting-stackvalue-that-will-be-included-in-the-stackapp">Resulting StackValue that will be included in the StackApp</a></h3>
+<pre><code class="language-yaml">kind: StackValue
+metadata:
+  name: demoapp-db-credentials
+spec:
+  insecureVal: password
+  name: demoapp-db-credentials
+  objectType: Secret
+  path: v1/secret/data/myapp/password
+  sourceType: vault
+</code></pre>
+<p>When this StackValue is applied to the cluster the StackValue controller will 
+reconcile it into a kubernetes Secret. The Value will be retrieved by 
+an api call to Vault at the URL provided for Vault in the StackAppsConfig
+at the api endpoint defined in <code>path:</code> above.</p>
+<p>Note that this is handled this way because the CI pipeline or developer
+that apply the StackApp should not have the ability to define an external
+location for making API calls. Access to the <code>StackAppsConfig</code> should be 
+limited to administrators via RBAC.</p>
+<h1><a class="header" href="#apprevision-1" id="apprevision-1">AppRevision</a></h1>
+<pre><code class="language-yaml">apiVersion: features.criticalstack.com/v1alpha1
+kind: AppRevision
+metadata:
+  name: demoapp-v1
+spec:
+  appRevisionConfig: #nested from StackAppConfig
+  manifests: demoapp-v1-r1
+  revision: 1
+  signatures: #RSA signature(s)
+</code></pre>
+<h1><a class="header" href="#getting-started" id="getting-started">Getting Started</a></h1>
+<h3><a class="header" href="#stay-tuned-for-getting-started-documentation" id="stay-tuned-for-getting-started-documentation">Stay tuned for getting started documentation.</a></h3>
+<h1><a class="header" href="#faq" id="faq">FAQ</a></h1>
+<p>Ask some questions, maybe they'll end up here!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
